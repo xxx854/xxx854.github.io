@@ -96,10 +96,45 @@
         <p>这是一个自动化的托管系统，目前支持网易云签到刷歌，bilibili赚经验+自动赛事预测，米游社原神签到。<br>目前已经实现<br>1.b站每日自动经验任务<br>2.b站赛事预测赚硬币任务<br>3.网易云自动签到刷歌任务<br>4.米游社原神签到领奖励任务以及米游币任务</p>
 <p>服务器地址<br><a target="_blank" rel="noopener" href="http://124.222.22.31:26666/">http://124.222.22.31:26666</a><br>使用说明<br>       新建托管任务请先注册或登录一个账号<br>       本项目默认会在早上8点开始执行任务，中午12点更新网易云状态信息<br>       任务执行完成之后，可前往我的任务中查看上一次的运行日志。<br>注：网易云状态信息有可能更新失败，如果要查看准确的，请前往网易云个人中心自行查看：<a target="_blank" rel="noopener" href="https://music.163.com/#/user/level">https://music.163.com/#/user/level</a></p>
 <p>··bilibili··<br>支持b站签到任务以及赛事预测任务，赛事预测默认会跟着押注多的一方押注，可以在配置中更改为反向押注</p>
-<p>使用扫码自动填充cookie值（推荐！！）<br><img src="/photo/1.png" alt="img"></p>
-<p>使用cookie登录</p>
-<p>使用电脑端浏览器登录bilibili<br>右键选择审查元素或者按f12调出开发者工具<br>选择 应用程序&#x2F;Application<br>找到 左边储存&#x2F;Storage 一栏并找到 Cookie&#x2F;Cookies 一项<br>选择bilibili.com并查看cookie值，如下图<br><img src="/photo/2.png" alt="img"></p>
-
+<p>使用扫码自动填充cookie值（推荐！！）</p>
+<p><img src="/photo/1.png" alt="img"></p>
+<p>2,使用cookie登录</p>
+<pre><code>    1,使用电脑端浏览器登录bilibili
+    2,右键选择审查元素或者按f12调出开发者工具
+    3,选择 应用程序/Application
+    4,找到 左边储存/Storage 一栏并找到 Cookie/Cookies 一项
+    5,选择bilibili.com并查看cookie值，如下图
+</code></pre>
+<p><img src="/photo/2.png" alt="img"></p>
+<p>进阶设置</p>
+<p>下面是给出的一张参数参考，页面中已经提供了翻译，如果想查看详情的话请对照下表<br><img src="/photo/3.png" alt="img"></p>
+<p>*tips:如果你没有上传过视频并开启充电计划，充电会失败，B 币券会浪费。此时建议配置为给指定的 up 主充电。&amp;&amp; 如果选择为指定up充电，请务必填写正确值</p>
+<p>userAgent 可选参数列表<br><img src="/photo/4.png" alt="img"><br>ps：如果尝试给关注的 up 投币十次后（保不准你关注的是年更 up 主），还没完成每日投币任务，则切换成热榜模式，给热榜视频投币</p>
+<p>投币数量代码做了处理，如果本日投币不能获得经验了，则不会投币，每天只投能获得经验的硬币。假设你设置每日投币 3 个，早上 7 点你自己投了 2 个硬币，则十点半时，程序只会投 1 个）</p>
+<p>··网易云··</p>
+<p>仅支持使用手机号和密码登录，国内手机号不用填国家代码。别的都是字面意思</p>
+<p>··米游社··<br>暂时只支持原神签到任务以及米游币任务，关于cookie的获取教程如下</p>
+<p>注意，米游社获取的cookie必须包括account_id&#x2F;ltuid&#x2F;login_uid和cookie_token字段，否则会被视为无效cookie<br>以下为重点<br>米游社获取的cookie中现在已经没有login_ticket字段了，如果需要使用米游币任务，请前往米哈游通行证处获取：<a target="_blank" rel="noopener" href="https://user.mihoyo.com/">https://user.mihoyo.com/</a></p>
+<p>如果您一个cookie中都包含了上述这些必要字段，第二项cookie就不用写了</p>
+<p>如果第一次添加任务的时候没有输入米哈游通行证的cookie或者cookie失效导致米游币任务执行失败，您可以在编辑功能中重新追加。</p>
+<p>米游币任务会执行以下几项内容：</p>
+<p>1,社区签到<br>2,点赞<br>3,分享<br>4,浏览</p>
+<p>电脑端<br>请尽量使用浏览器无痕模式来进行以下操作，否则注销账户之后，获取的cookie也会随之失效！</p>
+<p>懂行的人可以直接略过，直接从浏览器f12复制cookie就完事了<br><img src="/photo/5.png" alt="img"><br>添加米游社任务页面给出了提示，</p>
+<p>1,将这个红色标签拖动到书签栏<br>2,登录米游社，注意一定要登录<br>3,打开 米游社通行证&#x2F;米游社 页面<br>4,点击刚刚拖到书签的标签复制cookie即可<br><img src="/photo/6.png" alt="img"></p>
+<p>图片仅供参考，如果需要执行同时执行米游币任务，请务必填写两项cookie！</p>
+<p>订阅执行结果<br>使用webhook推送有两种方式：</p>
+<p>在新建任务时填入webhook，这种方式仅对这个任务生效。<br>使用全局webhook：在个人中心设置中设定全局webhook。<br>当同时存在单任务webhook和全局webhook时，程序会默认选择单任务webhook进行推送，只有在推送失败时才会使用全局webhook</p>
+<p>警告！！1.3版本的更新重构了推送部分的代码，之前设置的推送地址会全部失效，目前推送部分代码为json字符串形式传入，在填写webhook的页面中已经给出了生成器页面，请使用生成器生成之后复制到webhook一栏。<br>tips：个人信息修改中可以发送一条测试消息校验webhook的正确性。</p>
+<p>目前项目的推送支持：</p>
+<p>server 酱<br>server 酱 Turbo<br>Telegram<br>PUSH PLUS<br>钉钉<br>企业微信</p>
+<p>Server 酱 Turbo 版<br>1,前往 sct.ftqq.com点击登入，创建账号。<br>2,点击点SendKey ，生成一个 Key<br><img src="/photo/7.png" alt="img"><br>3,进入生成页面，选择server酱turbo，填入key<br>4,配置消息通道 ，选择方糖服务号，保存即可</p>
+<p>感谢大佬苍穹<br>开源地址:<a target="_blank" rel="noopener" href="https://github.com/wyt1215819315/autoplan">https://github.com/wyt1215819315/autoplan</a></p>
+        
+          <p class="article-more-link">
+            <a href="/2022/04/09/AutoPlan-help/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
